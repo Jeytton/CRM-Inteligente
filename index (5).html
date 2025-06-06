@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.I.S | Designer & Desenvolvedor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#f5d77f',
+                            DEFAULT: '#d4af37',
+                            dark: '#b38728',
+                        },
+                        dark: {
+                            light: '#2a2a2a',
+                            DEFAULT: '#1a1a1a',
+                            darker: '#121212',
+                        },
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f5d77f 50%, #b38728 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .gold-border {
+            border-image: linear-gradient(135deg, #d4af37 0%, #f5d77f 50%, #b38728 100%) 1;
+        }
+        
+        .gold-bg {
+            background: linear-gradient(135deg, #d4af37 0%, #f5d77f 50%, #b38728 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(135deg, #d4af37 0%, #f5d77f 50%, #b38728 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .portfolio-item {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        .testimonial-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .pricing-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        .gold-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .gold-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .gold-button:hover::before {
+            left: 100%;
+        }
+        
+        .certificate-badge {
+            transition: transform 0.3s ease;
+        }
+        
+        .certificate-badge:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            color: #d4af37;
+        }
+        
+        .form-input:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+    </style>
+<script src="https://lib.youware.com/youware-lib.1747145198.js" id="yourware-lib"></script></head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="fixed w-full top-0 z-50 bg-dark-darker bg-opacity-90 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-serif font-bold">
+                    <span class="gold-gradient">A.I.S</span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-gold transition-colors">Início</a>
+                    <a href="#about" class="nav-link text-white hover:text-gold transition-colors">Sobre</a>
+                    <a href="#services" class="nav-link text-white hover:text-gold transition-colors">Serviços</a>
+                    <a href="#portfolio" class="nav-link text-white hover:text-gold transition-colors">Portfólio</a>
+                    <a href="#testimonials" class="nav-link text-white hover:text-gold transition-colors">Depoimentos</a>
+                    <a href="#pricing" class="nav-link text-white hover:text-gold transition-colors">Planos</a>
+                    <a href="#contact" class="nav-link text-white hover:text-gold transition-colors">Contato</a>
+                </div>
+                
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-dark-darker py-4 mt-2 rounded-lg">
+                <div class="flex flex-col space-y-4 px-4">
+                    <a href="#home" class="text-white hover:text-gold transition-colors">Início</a>
+                    <a href="#about" class="text-white hover:text-gold transition-colors">Sobre</a>
+                    <a href="#services" class="text-white hover:text-gold transition-colors">Serviços</a>
+                    <a href="#portfolio" class="text-white hover:text-gold transition-colors">Portfólio</a>
+                    <a href="#testimonials" class="text-white hover:text-gold transition-colors">Depoimentos</a>
+                    <a href="#pricing" class="text-white hover:text-gold transition-colors">Planos</a>
+                    <a href="#contact" class="text-white hover:text-gold transition-colors">Contato</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 pb-16 bg-dark-darker relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-dark-darker via-dark to-dark-darker opacity-90"></div>
+            <div class="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-gold/5 to-transparent"></div>
+            <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-l from-gold/5 to-transparent"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
+                    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6">
+                        Transformando <span class="gold-gradient">ideias</span> em experiências <span class="gold-gradient">digitais</span> memoráveis
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
+                        Designer gráfico e desenvolvedor web especializado em criar soluções visuais impactantes e funcionais para empresas que buscam se destacar no mercado digital.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="gold-button bg-gold text-dark-darker font-medium py-3 px-8 rounded-full hover:bg-gold-dark transition-colors text-center">
+                            Solicitar orçamento
+                        </a>
+                        <a href="#portfolio" class="gold-button border-2 border-gold text-gold font-medium py-3 px-8 rounded-full hover:bg-gold/10 transition-colors text-center">
+                            Ver portfólio
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 flex justify-center animate-fadeIn delay-200">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-gold-light via-gold to-gold-dark p-1">
+                            <div class="w-full h-full rounded-full bg-dark-darker flex items-center justify-center overflow-hidden">
+                                <svg class="w-3/4 h-3/4 text-gold" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-dark-darker p-3 rounded-lg shadow-lg">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                                <span class="text-sm font-medium">Disponível para projetos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 animate-fadeIn delay-300">
+                <div class="text-center">
+                    <div class="text-3xl font-bold gold-gradient">5+</div>
+                    <div class="text-sm text-gray-400">Anos de experiência</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold gold-gradient">50+</div>
+                    <div class="text-sm text-gray-400">Projetos concluídos</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold gold-gradient">30+</div>
+                    <div class="text-sm text-gray-400">Clientes satisfeitos</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold gold-gradient">15+</div>
+                    <div class="text-sm text-gray-400">Certificações</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="relative">
+                        <div class="w-full h-96 bg-dark-light rounded-lg overflow-hidden">
+                            <svg class="w-full h-full text-gold/20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 12a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm0 2c-3.34 0-10 1.67-10 5v3h20v-3c0-3.33-6.66-5-10-5z"/>
+                            </svg>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-48 h-48 border-8 border-gold-dark rounded-lg"></div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 md:pl-12">
+                    <h2 class="text-2xl font-serif mb-2">Sobre mim</h2>
+                    <h3 class="text-4xl font-serif font-bold mb-6">
+                        <span class="gold-gradient">Alessandro Inacio de Souza</span>
+                    </h3>
+                    <p class="text-gray-300 mb-6">
+                        Sou um designer gráfico e desenvolvedor web apaixonado por criar experiências digitais que combinam estética e funcionalidade. Com mais de 5 anos de experiência no mercado, desenvolvi um olhar apurado para detalhes e uma abordagem estratégica para solucionar problemas de design e desenvolvimento.
+                    </p>
+                    <p class="text-gray-300 mb-8">
+                        Minha jornada profissional me permitiu trabalhar com empresas de diversos segmentos, desde startups até corporações estabelecidas, sempre entregando soluções personalizadas que atendem às necessidades específicas de cada cliente e superam suas expectativas.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <h4 class="text-gold font-medium mb-3">Design Skills</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>UI/UX Design</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>Identidade Visual</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>Design Responsivo</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>Motion Graphics</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-gold font-medium mb-3">Dev Skills</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>HTML, CSS, JavaScript</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>React & Vue.js</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>WordPress</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                                    <span>SEO & Performance</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="gold-button inline-block bg-gold text-dark-darker font-medium py-3 px-8 rounded-full hover:bg-gold-dark transition-colors">
+                        Entre em contato
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Services Section -->
+    <section id="services" class="py-20 bg-dark-darker">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-serif mb-2">Meus Serviços</h2>
+                <h3 class="text-4xl font-serif font-bold mb-6">
+                    <span class="gold-gradient">O que eu ofereço</span>
+                </h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Soluções completas para sua presença digital, desde a concepção da identidade visual até o desenvolvimento e manutenção de plataformas web.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-medium mb-4">Identidade Visual</h4>
+                    <p class="text-gray-400 mb-6">
+                        Desenvolvimento de logotipos, paletas de cores, tipografia e elementos visuais que comunicam a essência da sua marca de forma consistente e memorável.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Criação de logotipos</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Manual de identidade visual</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Papelaria corporativa</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-medium mb-4">Criação de Sites</h4>
+                    <p class="text-gray-400 mb-6">
+                        Desenvolvimento de websites responsivos, otimizados para SEO e com foco na experiência do usuário, utilizando as tecnologias mais modernas do mercado.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Sites institucionais</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Landing pages</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">E-commerce</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-medium mb-4">UI/UX Design</h4>
+                    <p class="text-gray-400 mb-6">
+                        Design de interfaces intuitivas e experiências de usuário que facilitam a navegação e aumentam as taxas de conversão do seu produto digital.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Wireframes e protótipos</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Design de interfaces</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Testes de usabilidade</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-medium mb-4">Manutenção Web</h4>
+                    <p class="text-gray-400 mb-6">
+                        Serviços de manutenção, atualização e otimização de sites existentes, garantindo segurança, performance e compatibilidade com as últimas tecnologias.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Atualizações de segurança</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Otimização de performance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Backup e segurança</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-medium mb-4">Design para Redes Sociais</h4>
+                    <p class="text-gray-400 mb-6">
+                        Criação de conteúdo visual para redes sociais que fortalece a presença digital da sua marca e aumenta o engajamento com seu público-alvo.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Posts para Instagram e Facebook</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Stories e Reels</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Capas para perfis</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-medium mb-4">Consultoria em Design</h4>
+                    <p class="text-gray-400 mb-6">
+                        Assessoria especializada para empresas que desejam melhorar sua comunicação visual e presença digital, com diagnósticos e recomendações personalizadas.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Auditoria de marca</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Estratégia de design</span>
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-gold rounded-full mr-2"></span>
+                            <span class="text-sm text-gray-300">Treinamento de equipes</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-serif mb-2">Meu Portfólio</h2>
+                <h3 class="text-4xl font-serif font-bold mb-6">
+                    <span class="gold-gradient">Trabalhos Recentes</span>
+                </h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Uma seleção dos meus melhores projetos de design gráfico e desenvolvimento web, demonstrando minha versatilidade e capacidade de entregar resultados excepcionais.
+                </p>
+            </div>
+            
+            <div class="mb-8">
+                <div class="flex justify-center space-x-4">
+                    <button class="portfolio-filter active px-4 py-2 rounded-full bg-gold text-dark-darker font-medium">Todos</button>
+                    <button class="portfolio-filter px-4 py-2 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-colors">Design Gráfico</button>
+                    <button class="portfolio-filter px-4 py-2 rounded-full border border-gold/30 text-gold hover:bg-gold/10 transition-colors">Desenvolvimento Web</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Portfolio Item 1 -->
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-dark-light">
+                        <div class="w-full h-full bg-gradient-to-br from-gold/20 to-dark-light flex items-center justify-center p-8">
+                            <svg class="w-full h-full text-gold/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.5 2h-15A2.5 2.5 0 0 0 2 4.5v15A2.5 2.5 0 0 0 4.5 22h15a2.5 2.5 0 0 0 2.5-2.5v-15A2.5 2.5 0 0 0 19.5 2zM11 19H7v-9h4v9zm-4-1h3v-7H7v7zm11 1h-6v-3h6v3zm0-4h-6v-2h6v2zm0-3h-6V9h6v3z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay p-6">
+                        <h4 class="text-xl font-medium text-gold mb-2">Identidade Visual</h4>
+                        <p class="text-gray-300 mb-4">Loja de Roupas Elegance</p>
+                        <a href="#" class="gold-button inline-block bg-gold text-dark-darker font-medium py-2 px-4 rounded-full hover:bg-gold-dark transition-colors">
+                            Ver detalhes
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 2 -->
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-dark-light">
+                        <div class="w-full h-full bg-gradient-to-br from-gold/20 to-dark-light flex items-center justify-center p-8">
+                            <svg class="w-full h-full text-gold/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay p-6">
+                        <h4 class="text-xl font-medium text-gold mb-2">UI Design</h4>
+                        <p class="text-gray-300 mb-4">Aplicativo de Delivery FoodExpress</p>
+                        <a href="#" class="gold-button inline-block bg-gold text-dark-darker font-medium py-2 px-4 rounded-full hover:bg-gold-dark transition-colors">
+                            Ver detalhes
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 3 -->
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-dark-light">
+                        <div class="w-full h-full bg-gradient-to-br from-gold/20 to-dark-light flex items-center justify-center p-8">
+                            <svg class="w-full h-full text-gold/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay p-6">
+                        <h4 class="text-xl font-medium text-gold mb-2">Site Institucional</h4>
+                        <p class="text-gray-300 mb-4">Clínica Odontológica SorrisoPerfeito</p>
+                        <a href="#" class="gold-button inline-block bg-gold text-dark-darker font-medium py-2 px-4 rounded-full hover:bg-gold-dark transition-colors">
+                            Ver detalhes
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 4 -->
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-dark-light">
+                        <div class="w-full h-full bg-gradient-to-br from-gold/20 to-dark-light flex items-center justify-center p-8">
+                            <svg class="w-full h-full text-gold/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay p-6">
+                        <h4 class="text-xl font-medium text-gold mb-2">Redesign de Site</h4>
+                        <p class="text-gray-300 mb-4">Empresa de Tecnologia TechSolutions</p>
+                        <a href="#" class="gold-button inline-block bg-gold text-dark-darker font-medium py-2 px-4 rounded-full hover:bg-gold-dark transition-colors">
+                            Ver detalhes
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 5 -->
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-dark-light">
+                        <div class="w-full h-full bg-gradient-to-br from-gold/20 to-dark-light flex items-center justify-center p-8">
+                            <svg class="w-full h-full text-gold/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay p-6">
+                        <h4 class="text-xl font-medium text-gold mb-2">Campanha Visual</h4>
+                        <p class="text-gray-300 mb-4">E-commerce ModaStyle</p>
+                        <a href="#" class="gold-button inline-block bg-gold text-dark-darker font-medium py-2 px-4 rounded-full hover:bg-gold-dark transition-colors">
+                            Ver detalhes
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Portfolio Item 6 -->
+                <div class="portfolio-item rounded-lg overflow-hidden">
+                    <div class="aspect-w-4 aspect-h-3 bg-dark-light">
+                        <div class="w-full h-full bg-gradient-to-br from-gold/20 to-dark-light flex items-center justify-center p-8">
+                            <svg class="w-full h-full text-gold/40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2V9h-2V7h4v10z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="portfolio-overlay p-6">
+                        <h4 class="text-xl font-medium text-gold mb-2">Landing Page</h4>
+                        <p class="text-gray-300 mb-4">Evento Online TechConference</p>
+                        <a href="#" class="gold-button inline-block bg-gold text-dark-darker font-medium py-2 px-4 rounded-full hover:bg-gold-dark transition-colors">
+                            Ver detalhes
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="gold-button inline-block border-2 border-gold text-gold font-medium py-3 px-8 rounded-full hover:bg-gold/10 transition-colors">
+                    Solicitar um projeto
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-dark-darker">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-serif mb-2">Depoimentos</h2>
+                <h3 class="text-4xl font-serif font-bold mb-6">
+                    <span class="gold-gradient">O que dizem sobre mim</span>
+                </h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Confira o que meus clientes têm a dizer sobre meus serviços e a experiência de trabalhar comigo.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-light to-gold-dark p-0.5">
+                            <div class="w-full h-full rounded-full bg-dark-darker flex items-center justify-center overflow-hidden">
+                                <svg class="w-8 h-8 text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium">Mariana Silva</h4>
+                            <p class="text-sm text-gold">CEO, ModaStyle</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-gold">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "O Alessandro transformou completamente a identidade visual da nossa marca. Seu trabalho foi impecável, desde o redesign do nosso logo até a criação do nosso e-commerce. Profissional extremamente talentoso e comprometido com prazos. Superou todas as nossas expectativas!"
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-light to-gold-dark p-0.5">
+                            <div class="w-full h-full rounded-full bg-dark-darker flex items-center justify-center overflow-hidden">
+                                <svg class="w-8 h-8 text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium">Ricardo Mendes</h4>
+                            <p class="text-sm text-gold">Diretor, TechSolutions</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-gold">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Contratamos o Alessandro para redesenhar nosso site corporativo e o resultado foi extraordinário. Ele entendeu perfeitamente o que precisávamos e entregou um produto final que não só é visualmente impressionante, mas também altamente funcional e otimizado. Já estamos planejando novos projetos juntos."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-light to-gold-dark p-0.5">
+                            <div class="w-full h-full rounded-full bg-dark-darker flex items-center justify-center overflow-hidden">
+                                <svg class="w-8 h-8 text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium">Dra. Carla Santos</h4>
+                            <p class="text-sm text-gold">Proprietária, SorrisoPerfeito</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-gold">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Como proprietária de uma clínica odontológica, precisava de um site que transmitisse profissionalismo e confiança. O Alessandro não só criou um site belíssimo, como também nos ajudou com toda a estratégia de presença digital. Desde o lançamento do site, tivemos um aumento significativo no número de novos pacientes."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-serif mb-2">Certificações</h2>
+                <h3 class="text-4xl font-serif font-bold mb-6">
+                    <span class="gold-gradient">Minha Formação</span>
+                </h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Invisto constantemente em meu desenvolvimento profissional para oferecer as soluções mais atualizadas e eficientes aos meus clientes.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Certificate 1 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">UX/UI Design</h4>
+                    <p class="text-sm text-gray-400 text-center">Google</p>
+                </div>
+                
+                <!-- Certificate 2 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">Desenvolvimento Web</h4>
+                    <p class="text-sm text-gray-400 text-center">Alura</p>
+                </div>
+                
+                <!-- Certificate 3 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 22C6.49 22 2 17.51 2 12S6.49 2 12 2s10 4.04 10 9c0 3.31-2.69 6-6 6h-1.77c-.28 0-.5.22-.5.5 0 .12.05.23.13.33.41.47.64 1.06.64 1.67A2.5 2.5 0 0 1 12 22zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8c.28 0 .5-.22.5-.5a.54.54 0 0 0-.14-.35c-.41-.46-.63-1.05-.63-1.65a2.5 2.5 0 0 1 2.5-2.5H16c2.21 0 4-1.79 4-4 0-3.86-3.59-7-8-7z"/>
+                            <circle cx="6.5" cy="11.5" r="1.5"/>
+                            <circle cx="9.5" cy="7.5" r="1.5"/>
+                            <circle cx="14.5" cy="7.5" r="1.5"/>
+                            <circle cx="17.5" cy="11.5" r="1.5"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">Design Gráfico</h4>
+                    <p class="text-sm text-gray-400 text-center">Udemy</p>
+                </div>
+                
+                <!-- Certificate 4 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">Design de Interfaces</h4>
+                    <p class="text-sm text-gray-400 text-center">Origamid</p>
+                </div>
+                
+                <!-- Certificate 5 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5-9h10v2H7z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">WordPress Avançado</h4>
+                    <p class="text-sm text-gray-400 text-center">Udemy</p>
+                </div>
+                
+                <!-- Certificate 6 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">React.js</h4>
+                    <p class="text-sm text-gray-400 text-center">Alura</p>
+                </div>
+                
+                <!-- Certificate 7 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">Vue.js</h4>
+                    <p class="text-sm text-gray-400 text-center">Origamid</p>
+                </div>
+                
+                <!-- Certificate 8 -->
+                <div class="certificate-badge bg-dark p-6 rounded-lg border border-gold/20 flex flex-col items-center">
+                    <div class="w-16 h-16 mb-4">
+                        <svg class="w-full h-full text-gold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34a.996.996 0 0 0-1.41 0L9 12.25 11.75 15l8.96-8.96a.996.996 0 0 0 0-1.41z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-center font-medium mb-2">Design Thinking</h4>
+                    <p class="text-sm text-gray-400 text-center">Google</p>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-dark-darker">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-serif mb-2">Planos</h2>
+                <h3 class="text-4xl font-serif font-bold mb-6">
+                    <span class="gold-gradient">Pacotes de Serviços</span>
+                </h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Escolha o plano que melhor atende às necessidades do seu projeto e comece a transformar suas ideias em realidade.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Pricing Card 1 -->
+                <div class="pricing-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="text-center mb-6">
+                        <h4 class="text-xl font-medium mb-2">Essencial</h4>
+                        <div class="text-3xl font-bold mb-2">
+                            <span class="text-gold">R$ 1.500</span>
+                        </div>
+                        <p class="text-sm text-gray-400">Ideal para pequenos projetos</p>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Design de logotipo</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Site de 3 páginas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Design responsivo</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Formulário de contato</span>
+                        </li>
+                        <li class="flex items-center text-gray-500">
+                            <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <span>SEO básico</span>
+                        </li>
+                        <li class="flex items-center text-gray-500">
+                            <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <span>Integração com redes sociais</span>
+                        </li>
+                        <li class="flex items-center text-gray-500">
+                            <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            <span>Suporte por 1 mês</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center">
+                        <a href="#contact" class="gold-button inline-block w-full bg-dark-light text-white font-medium py-3 px-6 rounded-full hover:bg-dark transition-colors border border-gold/30">
+                            Selecionar plano
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Pricing Card 2 -->
+                <div class="pricing-card bg-dark p-8 rounded-lg border-2 border-gold relative transform scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gold text-dark-darker text-sm font-medium py-1 px-4 rounded-full">
+                        Mais popular
+                    </div>
+                    
+                    <div class="text-center mb-6">
+                        <h4 class="text-xl font-medium mb-2">Profissional</h4>
+                        <div class="text-3xl font-bold mb-2">
+                            <span class="text-gold">R$ 3.500</span>
+                        </div>
+                        <p class="text-sm text-gray-400">Perfeito para empresas em crescimento</p>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Identidade visual completa</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Site de até 7 páginas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Design responsivo premium</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>SEO básico</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Integração com redes sociais</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Suporte por 3 meses</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Área administrativa</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center">
+                        <a href="#contact" class="gold-button inline-block w-full bg-gold text-dark-darker font-medium py-3 px-6 rounded-full hover:bg-gold-dark transition-colors">
+                            Selecionar plano
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Pricing Card 3 -->
+                <div class="pricing-card bg-dark p-8 rounded-lg border border-gold/20">
+                    <div class="text-center mb-6">
+                        <h4 class="text-xl font-medium mb-2">Premium</h4>
+                        <div class="text-3xl font-bold mb-2">
+                            <span class="text-gold">R$ 6.000</span>
+                        </div>
+                        <p class="text-sm text-gray-400">Solução completa para empresas</p>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Identidade visual premium</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Site completo ilimitado</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>E-commerce (se necessário)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>SEO avançado</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Integrações avançadas</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Suporte por 6 meses</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-5 h-5 text-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Treinamento da equipe</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="text-center">
+                        <a href="#contact" class="gold-button inline-block w-full bg-dark-light text-white font-medium py-3 px-6 rounded-full hover:bg-dark transition-colors border border-gold/30">
+                            Selecionar plano
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-2xl font-serif mb-2">Contato</h2>
+                <h3 class="text-4xl font-serif font-bold mb-6">
+                    <span class="gold-gradient">Vamos trabalhar juntos</span>
+                </h3>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Tem um projeto em mente ou precisa de ajuda com sua presença digital? Entre em contato comigo e vamos conversar sobre como posso ajudar a transformar suas ideias em realidade.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="bg-dark-light p-8 rounded-lg">
+                    <h4 class="text-xl font-medium mb-6">Envie uma mensagem</h4>
+                    
+                    <form action="#" method="POST" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Nome completo</label>
+                            <input type="text" id="name" name="name" class="w-full bg-dark-darker border border-gray-700 rounded-lg px-4 py-2 text-white form-input focus:outline-none focus:ring-2 focus:ring-gold/50" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                            <input type="email" id="email" name="email" class="w-full bg-dark-darker border border-gray-700 rounded-lg px-4 py-2 text-white form-input focus:outline-none focus:ring-2 focus:ring-gold/50" required>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Assunto</label>
+                            <input type="text" id="subject" name="subject" class="w-full bg-dark-darker border border-gray-700 rounded-lg px-4 py-2 text-white form-input focus:outline-none focus:ring-2 focus:ring-gold/50" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" class="w-full bg-dark-darker border border-gray-700 rounded-lg px-4 py-2 text-white form-input focus:outline-none focus:ring-2 focus:ring-gold/50" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="gold-button w-full bg-gold text-dark-darker font-medium py-3 px-6 rounded-full hover:bg-gold-dark transition-colors">
+                                Enviar mensagem
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-dark-light p-8 rounded-lg mb-8">
+                        <h4 class="text-xl font-medium mb-6">Informações de contato</h4>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-medium text-gray-300 mb-1">Email</h5>
+                                    <a href="mailto:jeitton@gmail.com" class="text-gold hover:text-gold-light transition-colors">jeitton@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-medium text-gray-300 mb-1">Telefone</h5>
+                                    <a href="tel:+5511987654321" class="text-gold hover:text-gold-light transition-colors">(11) 98765-4321</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-gold/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="text-sm font-medium text-gray-300 mb-1">Localização</h5>
+                                    <p class="text-gold">São Paulo, SP - Brasil</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-dark-light p-8 rounded-lg">
+                        <h4 class="text-xl font-medium mb-6">Redes sociais</h4>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="https://www.instagram.com/ignacio.zouza" target="_blank" class="flex items-center p-3 bg-dark-darker rounded-lg hover:bg-dark transition-colors">
+                                <div class="w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fab fa-instagram text-gold"></i>
+                                </div>
+                                <span>Instagram</span>
+                            </a>
+                            
+                            <a href="#" target="_blank" class="flex items-center p-3 bg-dark-darker rounded-lg hover:bg-dark transition-colors">
+                                <div class="w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fab fa-linkedin-in text-gold"></i>
+                                </div>
+                                <span>LinkedIn</span>
+                            </a>
+                            
+                            <a href="#" target="_blank" class="flex items-center p-3 bg-dark-darker rounded-lg hover:bg-dark transition-colors">
+                                <div class="w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fab fa-behance text-gold"></i>
+                                </div>
+                                <span>Behance</span>
+                            </a>
+                            
+                            <a href="#" target="_blank" class="flex items-center p-3 bg-dark-darker rounded-lg hover:bg-dark transition-colors">
+                                <div class="w-10 h-10 bg-gold/10 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fab fa-github text-gold"></i>
+                                </div>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-dark-darker py-10 border-t border-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-serif font-bold">
+                        <span class="gold-gradient">A.I.S</span>
+                    </a>
+                    <p class="text-gray-400 mt-2">Designer & Desenvolvedor</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="https://www.instagram.com/ignacio.zouza" target="_blank" class="social-icon text-white hover:text-gold transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-icon text-white hover:text-gold transition-colors">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-icon text-white hover:text-gold transition-colors">
+                        <i class="fab fa-behance text-xl"></i>
+                    </a>
+                    <a href="#" target="_blank" class="social-icon text-white hover:text-gold transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2025 Alessandro Inacio de Souza. Todos os direitos reservados.
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-gold text-sm transition-colors">Política de Privacidade</a>
+                    <a href="#" class="text-gray-400 hover:text-gold text-sm transition-colors">Termos de Serviço</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Menu Mobile Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Portfolio Filters
+        const portfolioFilters = document.querySelectorAll('.portfolio-filter');
+        
+        portfolioFilters.forEach(filter => {
+            filter.addEventListener('click', () => {
+                // Remove active class from all filters
+                portfolioFilters.forEach(f => {
+                    f.classList.remove('active', 'bg-gold', 'text-dark-darker');
+                    f.classList.add('border', 'border-gold/30', 'text-gold');
+                });
+                
+                // Add active class to clicked filter
+                filter.classList.add('active', 'bg-gold', 'text-dark-darker');
+                filter.classList.remove('border', 'border-gold/30', 'text-gold');
+                
+                // Filter logic would go here
+            });
+        });
+    </script>
+</body>
+</html>
